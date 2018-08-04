@@ -16,16 +16,17 @@ var (
 )
 
 type DoubanBook struct {
-	Title    string
-	Subtitle string
-	Other    string
-	Desc     string
-	Year     string
-	Area     string
-	Tag      string
-	Star     string
-	Comment  string
-	Quote    string
+	gorm.Model
+	Title      string
+	Subtitle   string
+	Author     string
+	Translator string
+	Publisher  string
+	PubDate    string
+	Price      string
+	Star       string
+	CommentNum string
+	Quote      string
 }
 
 func init() {
@@ -43,4 +44,5 @@ func init() {
 		log.Fatalf("gorm.Open.err: %v", err)
 	}
 	DB.SingularTable(true)
+	DB.AutoMigrate(&DoubanBook{})
 }
