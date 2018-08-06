@@ -67,9 +67,10 @@ func ParseBooks(url string) (books []model.DoubanBook, err error) {
 		comments := head.Eq(1).Find("div.star > span.pl").Text()
 		comments = strings.Replace(comments, "\n", "", -1)
 		comments = strings.Replace(comments, " ", "", -1)
-		comment := []rune(comments)
-		endNum := len(comment) - len([]rune("人评价)"))
-		commentnum := string(comment[1:endNum])
+		prefix := "("
+		suffix := "人评价)"
+		comments = strings.TrimPrefix(comments, prefix)
+		comments = strings.TrimSuffix(comments, suffix)
 		quote := head.Eq(1).Find("p.quote > span.inq").Text()
 
 		book := model.DoubanBook{
@@ -81,7 +82,7 @@ func ParseBooks(url string) (books []model.DoubanBook, err error) {
 			PubDate:    pubDate,
 			Price:      price,
 			Star:       star,
-			CommentNum: commentnum,
+			CommentNum: comments,
 			Quote:      quote,
 		}
 		log.Printf("index: %d, item: %v", index, book)

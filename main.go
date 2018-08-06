@@ -21,12 +21,12 @@ func booksDataCrawler() {
 		}
 		doubanBooks = append(doubanBooks, books...)
 	}
-	log.Printf("doubanBooks: %v", doubanBooks)
-	for index, book := range doubanBooks {
-		if err := model.DB.Create(&book).Error; err != nil {
-			log.Fatalf("index: %d, err: %v", index, err)
-		}
-	}
+	// log.Printf("doubanBooks: %v", doubanBooks)
+	// for index, book := range doubanBooks {
+	// 	if err := model.DB.Create(&book).Error; err != nil {
+	// 		log.Fatalf("index: %d, err: %v", index, err)
+	// 	}
+	// }
 }
 
 func main() {
